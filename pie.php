@@ -63,12 +63,15 @@
  <script src="assets/vendor/fullcalendar.min.js"></script>
  <script src="assets/js/calendars.js"></script>
  <script src="assets/js/charts_index.js"></script>
- <script src="assets/js/googleMapsMEN.js"></script>
+
  <script src="assets/js/municipio.js"></script>
  <script src="assets/js/dpto.js"></script>
  <script src="assets/js/instituciones.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
  <script src="assets/js/grafico.js" type="module"></script>
+
+ <script src="assets/vendor/jquery.dataTables.js"></script>
+ <script src="assets/vendor/dataTables.bootstrap4.js"></script>
 
  </body>
 

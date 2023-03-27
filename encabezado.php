@@ -30,6 +30,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <link type="text/css" href="assets/css/themes/default/app.css" rel="stylesheet" />
     <link type="text/css" href="assets/css/themes/default/custom.css" rel="stylesheet" />
 
+    <!-- DataTable CSS -->
+    <link type="text/css" href="assets/css/themes/default/vendor-bootstrap-datatables.css" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <!-- google maps-->

@@ -1,8 +1,6 @@
 const ctx = document.getElementById("myChart").getContext("2d");
 const ctxPie = document.getElementById("myChartPie").getContext("2d");
-const ctxHorizontalBar = document
-  .getElementById("myChartHorizontalBar")
-  .getContext("2d");
+const ctxHorizontalBar = document.getElementById("myChartHorizontalBar").getContext("2d");
 
 // <block:data:3>
 const dataPie = {

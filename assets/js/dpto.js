@@ -1,6 +1,9 @@
 var formDpto = document.getElementById("formDpto");
 var answerDpto = document.getElementById("answerDpto");
 var result = document.getElementById("result");
+var tableBody = document.getElementById("tableBody");
+var content_scroll = document.getElementById("content_scroll");
+const loadingModal = document.getElementById("loading-modal");
 
 formDpto.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -13,8 +16,11 @@ formDpto.addEventListener("submit", (e) => {
       answerDpto.classList.remove("show");
     }, 2000);
   } else {
-    console.log(dpto);
-    fetch("http://localhost/FICHA/dev/backend/getCoordenadasDpto.php", {
+    // Mostrar el modal de carga
+    loadingModal.style.display = "block";
+    content_scroll.classList.remove("mdk-header-layout__content--scrollable");
+
+    fetch("backend/getCoordenadasDpto.php", {
       method: "POST",
       body: JSON.stringify({
         dpto: dpto,
@@ -25,9 +31,12 @@ formDpto.addEventListener("submit", (e) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        //Destruyo los datos que esten inicializados en el DataTable para que dicha tabla se actualice
+        var table = $("#data-table").DataTable();
+        table.destroy();
+
         //Obtuvo el JSON, entonces ahora dibuje el mapa
         locations = data;
-        console.log(data);
 
         const map = new google.maps.Map(document.getElementById("mapDpto"), {
           zoom: 6,
@@ -35,7 +44,9 @@ formDpto.addEventListener("submit", (e) => {
           //mapTypeId: "hybrid",
         });
 
+        //Variables euxiliares contador y contenido del dataTable
         let contador = 0;
+        let contentTable = ``;
 
         for (i = 0; i <= data.length - 1; i++) {
           let codigo_dane = data[i]["codigo_dane_sede"];
@@ -59,7 +70,7 @@ formDpto.addEventListener("submit", (e) => {
             "<p><b>Código Dane: </b>" +
             codigo_dane +
             "</p>" +
-            "<p><b>ID de la EE: </b>" +
+            "<p><b>ID: </b>" +
             sede_id +
             "</p>" +
             "<p><b>Nombre EE: </b><span class='text-danger'>" +
@@ -68,25 +79,25 @@ formDpto.addEventListener("submit", (e) => {
             "<p><b>Nombre Sede: </b><span class='text-danger'>" +
             nombre_sede +
             "</span></p>" +
-            "<p><b>Total Matriculados en la  EE: </b>" +
+            "<p><b>Total Matriculados en la  sede: </b>" +
             total_matricula +
             "</p>" +
-            "<p><b>Zona EE: </b>" +
+            "<p><b>Zona sede: </b>" +
             zona +
             "</p>" +
-            "<p><b>Dirección EE: </b>" +
+            "<p><b>Dirección sede: </b>" +
             direccion_sede +
             "</p>" +
-            "<p><b>Departamento de la EE: </b>" +
+            "<p><b>Departamento de la sede: </b>" +
             departamento +
             "</p>" +
-            "<p><b>Municipio de la EE: </b>" +
+            "<p><b>Municipio de la sede: </b>" +
             municipio +
             "</p>" +
-            "<p><b>Latitud de la EE: </b><span class='text-danger'>" +
+            "<p><b>Latitud de la sede: </b><span class='text-danger'>" +
             lat +
             "</span></p>" +
-            "<p><b>Longitud de la EE: </b><span class='text-danger'>" +
+            "<p><b>Longitud de la sede: </b><span class='text-danger'>" +
             lng +
             "</span></p>" +
             "</div>" +
@@ -113,9 +124,31 @@ formDpto.addEventListener("submit", (e) => {
             maxWidth: 1000,
             ariaLabel: "Uluru",
           });
-          
-          contador ++;
+
+          //Guarpo en una variable cada fila del dataTable con la informacion de las sedes
+          contentTable += `
+          <tr>
+            <td>${codigo_dane}</td>
+            <td>${sede_id}</td>
+            <td>${nombre_EE}</td>
+            <td>${nombre_sede}</td>
+            <td>${total_matricula}</td>
+            <td>${zona}</td>
+            <td>${direccion_sede}</td>
+            <td>${departamento}</td>
+            <td>${municipio}</td>
+            <td>${lat}</td>
+            <td>${lng}</td>
+          </tr>
+        `;
+
+          contador++;
         }
+
+        //Pinto la tabla con los datos correpondientes
+        tableBody.innerHTML = "";
+        tableBody.innerHTML = contentTable;
+
         result.classList.add("show");
         result.innerHTML = `
           <i class="material-icons text-success md-48">check_circle</i>
@@ -124,6 +157,45 @@ formDpto.addEventListener("submit", (e) => {
               <span>Instituciones Totales en el Departamento de ${dpto}</span>
           </div>
         `;
+
+        //Inicio el .dataTable para que se aplique el dataTable a la tabla correspondiente pero antes destruyo la inicializacion para que no me salte error
+        $("#data-table").dataTable({
+          language: {
+            sProcessing: "Procesando...",
+            sLengthMenu: "Mostrar _MENU_ registros",
+            sZeroRecords: "No se encontraron resultados",
+            sEmptyTable: "Ningún dato disponible en esta tabla",
+            sInfo:
+              "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            sInfoEmpty:
+              "Mostrando registros del 0 al 0 de un total de 0 registros",
+            sInfoFiltered: "(filtrado de un total de _MAX_ registros)",
+            sInfoPostFix: "",
+            sSearch: "Buscar:",
+            sUrl: "",
+            sInfoThousands: ",",
+            sLoadingRecords: "Cargando...",
+            oPaginate: {
+              sFirst: "Primero",
+              sLast: "Último",
+              sNext: "Siguiente",
+              sPrevious: "Anterior",
+            },
+            oAria: {
+              sSortAscending:
+                ": Activar para ordenar la columna de manera ascendente",
+              sSortDescending:
+                ": Activar para ordenar la columna de manera descendente",
+            },
+            buttons: {
+              copy: "Copiar",
+              colvis: "Visibilidad",
+            },
+          },
+        });
+        // Ocultar el modal de carga
+        loadingModal.style.display = "none";
+        content_scroll.classList.add("mdk-header-layout__content--scrollable");
       });
   }
 });

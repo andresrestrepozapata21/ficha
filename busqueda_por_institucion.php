@@ -16,7 +16,7 @@
             </div>
             <div class="table-responsive">
                 <form class="col-6 my-3 ml-3 mt-5" id="formInstitucion">
-                    <label class="">Ingrese el Nombre de la Institución deseada, luego seleccione la institución que concuerde con los parametros deseados en la lista que le aparecerá:</label>
+                    <label class="">Ingrese el nombre de la institución deseada, luego seleccione la institución que deseada en la lista que le aparecerá:</label>
                     <br>
                     <input type="hidden" class="form-control" id="cp" name="cp">
                     <input type="text" class="form-control" id="campo" name="campo" placeholder="Ingrese el nombre de la institución" required>
@@ -44,37 +44,58 @@
             </div>
         </div>
 
-        <hr>
-
-        <div class="card-deck">
-            <div class="card p-2 pl-3 pr-3">
-                <div class="result media justify-items-center align-items-center h-md-100" id="result">
-                    <i class="material-icons text-success md-48">check_circle</i>
+        <div id="contentResultInstitucion" style="display: none;">
+            <hr>
+            <div class="card-deck mb-3">
+                <div class="col-4">
+                    <div class="card p-2 pl-3 pr-3">
+                        <div class="result media justify-items-center align-items-center h-md-100" id="resultInst">
+                            <i class="material-icons text-success md-48">check_circle</i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
+
+                <div class="col-4">
+                    <div class="card p-2 pl-3 pr-3">
+                        <div class="result media justify-items-center align-items-center h-md-100" id="resultInst_2">
+                            <i class="material-icons text-success md-48">check_circle</i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="card p-2 pl-3 pr-3">
+                        <div class="result media justify-items-center align-items-center h-md-100" id="resultInst_3">
+                            <i class="material-icons text-success md-48">check_circle</i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
-        </div>
 
 
-        <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <h4 class="card-title">Visor Georeferenciado</h4>
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h4 class="card-title">Visor Georeferenciado</h4>
+                </div>
+                <div class="table-responsive">
+                    <div id="mapInstitucion" class="mapaColombia"></div>
+                </div>
             </div>
-            <div class="table-responsive">
-                <div id="mapInstitucion" class="mapaColombia"></div>
-            </div>
-        </div>
 
-        <hr>
+            <hr>
 
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Información de la Institución
-                </h4>
-            </div>
-            <div class="py-4">
-                <div class="table-responsive" id="info"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Información de la Institución
+                    </h4>
+                </div>
+                <div class="py-4">
+                    <div class="table-responsive" id="info"></div>
+                </div>
             </div>
         </div>
     </div>

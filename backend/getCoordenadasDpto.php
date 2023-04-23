@@ -10,6 +10,7 @@ $resultado = mysqli_query($conn, $sentencia);
 
 $filas = array();
 while ($valor = mysqli_fetch_assoc($resultado)) {
+    //Guardo el arreglo
     $filas[] = $valor;
 }
 

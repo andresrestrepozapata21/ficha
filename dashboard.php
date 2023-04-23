@@ -36,6 +36,32 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
                 </span>
             </div>
         </div>
+        <!-- para borrar esto es lo quye hare mañana -->
+        <div class="card p-2">
+            <div class="d-md-flex align-items-center justify-content-start table-responsive">
+                <img src="assets/images/lista.PNG" alt="">
+            </div>
+        </div>
+        <!-- INFORMACION GENERAL DE LAS INSTITUCIONES -->
+        <div class="p-2">
+            <div class="d-md-flex align-items-center justify-content-start">
+                <span class="badge mr-md-2">
+                    <h1>Información General de las Instituciones</h1>
+                </span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h3 class="card-title">Cantidad de Instituciones por Departamento</h3>
+            </div>
+            <div class="p-4">
+                <div class="table-responsive">
+                    <span >
+                        <canvas class="table-responsive" id="myChart" width="100%" height="30%"></canvas>
+                    </span>
+                </div>
+            </div>
+        </div>
         <div class="card-deck">
             <div class="card p-2 pl-3 pr-3">
                 <div class="media justify-items-center align-items-center h-md-100">
@@ -68,54 +94,64 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
                 <div class="clearfix"></div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <h3 class="card-title">Gráfico Barras</h3>
-            </div>
-            <div class="p-4">
-                <div class="table-responsive">
-                    <span class="table-responsive">
-                        <canvas id="myChart" width="400" height="70"></canvas>
-                    </span>
-                </div>
-            </div>
-        </div>
-
         <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
-            <div class="col-6">
+            <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Diagrama de Pastel</h3>
+                    <h3 class="card-title">Distribucion Urbana y Rural</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
                         <span class="table-responsive">
-                            <canvas id="myChartPie" width="100%" height="100%"></canvas>
+                            <canvas class="table-responsive" id="myChartPie" width="100%" height="100%"></canvas>
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+        </div>
+
+        <!-- INFORMACION GENERAL DE LOS ESTUDIANTES -->
+        <div class="p-2">
+            <div class="d-md-flex align-items-center justify-content-start">
+                <span class="badge mr-md-2">
+                    <h1>Información General de los Estudiantes</h1>
+                </span>
+            </div>
+        </div>
+        <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
+            <div class="col-4">
                 <div class="card-header">
                     <h3 class="card-title">Gráfico barras Horizontales</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
                         <span class="table-responsive">
-                            <canvas id="myChartHorizontalBar" width="100%" height="100%"></canvas>
+                            <canvas class="table-responsive" id="myChartPie2" width="100%" height="100%"></canvas>
                         </span>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <h4 class="card-title">Visor Georeferenciado</h4>
+        <!-- INFORMACION GENERAL DE LOS DOCENTES -->
+        <div class="p-2">
+            <div class="d-md-flex align-items-center justify-content-start">
+                <span class="badge mr-md-2">
+                    <h1>Información General de los Docentes</h1>
+                </span>
             </div>
-            <div class="table-responsive">
-                <div id="map" class="mapaColombia"></div>
+        </div>
+        <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Gráfico barras Horizontales</h3>
+                </div>
+                <div class="">
+                    <div class="">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="myChartPie2" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

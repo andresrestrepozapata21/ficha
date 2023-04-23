@@ -10,6 +10,12 @@ $resultado = mysqli_query($conn, $sentencia);
 
 $filas = array();
 while ($valor = mysqli_fetch_assoc($resultado)) {
+    //Miro la cantidad de Docentes por Institucion
+    $sentenciaDocentes = "SELECT count(*) cantidad_docentes FROM docentes WHERE codigo_dane = '" . $valor['codigo_dane_sede'] . "'";
+    $resultadoDocentes = mysqli_query($conn, $sentenciaDocentes);
+    $numero = mysqli_fetch_assoc($resultadoDocentes);
+    //Agrego el numero de docentes por sede al arreglo
+    $valor["numero_docentes"] = $numero["cantidad_docentes"];
     $filas[] = $valor;
 }
 

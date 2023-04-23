@@ -1,9 +1,13 @@
 var formDpto = document.getElementById("formDpto");
 var answerDpto = document.getElementById("answerDpto");
 var result = document.getElementById("result");
+var result_2 = document.getElementById("result_2");
 var tableBody = document.getElementById("tableBody");
 var content_scroll = document.getElementById("content_scroll");
 const loadingModal = document.getElementById("loading-modal");
+const contentResultDpto = document.getElementById("contentResultDpto");
+
+const $fragmentoDataTable = document.createDocumentFragment();
 
 formDpto.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -23,7 +27,7 @@ formDpto.addEventListener("submit", (e) => {
     fetch("backend/getCoordenadasDpto.php", {
       method: "POST",
       body: JSON.stringify({
-        dpto: dpto,
+        dpto,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -36,8 +40,6 @@ formDpto.addEventListener("submit", (e) => {
         table.destroy();
 
         //Obtuvo el JSON, entonces ahora dibuje el mapa
-        locations = data;
-
         const map = new google.maps.Map(document.getElementById("mapDpto"), {
           zoom: 6,
           center: { lat: 4.691798, lng: -73.869012 },
@@ -47,19 +49,22 @@ formDpto.addEventListener("submit", (e) => {
         //Variables euxiliares contador y contenido del dataTable
         let contador = 0;
         let contentTable = ``;
+        let total_matriculado_acumulado = 0;
 
-        for (i = 0; i <= data.length - 1; i++) {
-          let codigo_dane = data[i]["codigo_dane_sede"];
-          let sede_id = data[i]["sede_id"];
-          let nombre_EE = data[i]["nombre_EE"];
-          let nombre_sede = data[i]["nombre_sede"];
-          let total_matricula = data[i]["total_matricula"];
-          let zona = data[i]["zona"];
-          let direccion_sede = data[i]["direccion_sede"];
-          let departamento = data[i]["departamento"];
-          let municipio = data[i]["municipio"];
-          let lat = data[i]["lat"];
-          let lng = data[i]["lng"];
+        data.forEach((el) => {
+          let codigo_dane = el.codigo_dane_sede;
+          let sede_id = el.sede_id;
+          let nombre_EE = el.nombre_EE;
+          let nombre_sede = el.nombre_sede;
+          let total_matricula = el.total_matricula;
+          let zona = el.zona;
+          let direccion_sede = el.direccion_sede;
+          let departamento = el.departamento;
+          let municipio = el.municipio;
+          let lat = el.lat;
+          let lng = el.lng;
+
+          //String del Marker del mapa
           let contentString =
             '<div id="content">' +
             '<div id="siteNotice">' +
@@ -102,9 +107,8 @@ formDpto.addEventListener("submit", (e) => {
             "</span></p>" +
             "</div>" +
             "</div>";
-          let latitud = data[i]["lat"];
-          let longitud = data[i]["lng"];
-          let position = { lat: latitud, lng: longitud };
+
+          let position = { lat, lng };
 
           const marker = new google.maps.Marker({
             position: position,
@@ -126,8 +130,8 @@ formDpto.addEventListener("submit", (e) => {
           });
 
           //Guarpo en una variable cada fila del dataTable con la informacion de las sedes
-          contentTable += `
-          <tr>
+          const $tr = document.createElement("tr");
+          $tr.innerHTML = `
             <td>${codigo_dane}</td>
             <td>${sede_id}</td>
             <td>${nombre_EE}</td>
@@ -139,22 +143,33 @@ formDpto.addEventListener("submit", (e) => {
             <td>${municipio}</td>
             <td>${lat}</td>
             <td>${lng}</td>
-          </tr>
         `;
+          $fragmentoDataTable.appendChild($tr);
 
           contador++;
-        }
+          total_matriculado_acumulado += total_matricula;
+        });
 
         //Pinto la tabla con los datos correpondientes
         tableBody.innerHTML = "";
-        tableBody.innerHTML = contentTable;
+        tableBody.appendChild($fragmentoDataTable);
 
+        //Muestro los resultados
         result.classList.add("show");
         result.innerHTML = `
           <i class="material-icons text-success md-48">check_circle</i>
           <div class="media-body pl-2">
-              <h4 class="m-0">${contador}</h4>
+              <h4 class="m-0">${contador.toLocaleString()}</h4>
               <span>Instituciones Totales en el Departamento de ${dpto}</span>
+          </div>
+        `;
+
+        result_2.classList.add("show");
+        result_2.innerHTML = `
+          <i class="material-icons text-success md-48">check_circle</i>
+          <div class="media-body pl-2">
+              <h4 class="m-0">${total_matriculado_acumulado.toLocaleString()}</h4>
+              <span>Total de Estudiantes Matriculados en el Departamento: ${dpto}</span>
           </div>
         `;
 
@@ -196,6 +211,7 @@ formDpto.addEventListener("submit", (e) => {
         // Ocultar el modal de carga
         loadingModal.style.display = "none";
         content_scroll.classList.add("mdk-header-layout__content--scrollable");
+        contentResultDpto.style.display = "block";
       });
   }
 });

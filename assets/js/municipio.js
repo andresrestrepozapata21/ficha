@@ -1,9 +1,12 @@
 var formMunicipio = document.getElementById("formMunicipio");
 var answerMunicipio = document.getElementById("answerMunicipio");
 var resultM = document.getElementById("resultMunicipio");
+var resultM_2 = document.getElementById("resultMunicipio_2");
+var resultM_3 = document.getElementById("resultMunicipio_3");
 var tableBody = document.getElementById("tableBody");
 var content_scroll = document.getElementById("content_scroll");
 const loadingModalTown = document.getElementById("loading-modal");
+const contentResultMunicipio = document.getElementById("contentResultMunicipio");
 
 formMunicipio.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -50,6 +53,8 @@ formMunicipio.addEventListener("submit", (e) => {
 
         let contador = 0;
         let contentTable = ``;
+        let total_matriculado_acumulado = 0;
+        let total_docentes_acumulado = 0;
 
         for (i = 0; i <= data.length - 1; i++) {
           let codigo_dane = data[i]["codigo_dane_sede"];
@@ -57,6 +62,7 @@ formMunicipio.addEventListener("submit", (e) => {
           let nombre_EE = data[i]["nombre_EE"];
           let nombre_sede = data[i]["nombre_sede"];
           let total_matricula = data[i]["total_matricula"];
+          let numero_docentes = data[i]["numero_docentes"];
           let zona = data[i]["zona"];
           let direccion_sede = data[i]["direccion_sede"];
           let departamento = data[i]["departamento"];
@@ -86,6 +92,9 @@ formMunicipio.addEventListener("submit", (e) => {
             "<p><b>Total Matriculados en la  EE: </b>" +
             total_matricula +
             "</p>" +
+            "<p><b>Número de Docentes: </b><span class='text-danger'>" +
+            numero_docentes +
+            "</span></p>" +
             "<p><b>Zona EE: </b>" +
             zona +
             "</p>" +
@@ -111,6 +120,12 @@ formMunicipio.addEventListener("submit", (e) => {
           let position = { lat: latitud, lng: longitud };
 
           const marker = new google.maps.Marker({
+            label: {
+              text: nombre_sede.substring(0, 2),
+              color: '#222222',
+              fontSize: '15px',
+              fontWeight: 'bold',
+            },
             position: position,
             map,
             title: "Uluru (Ayers Rock)",
@@ -137,6 +152,7 @@ formMunicipio.addEventListener("submit", (e) => {
             <td>${nombre_EE}</td>
             <td>${nombre_sede}</td>
             <td>${total_matricula}</td>
+            <td>${numero_docentes}</td>
             <td>${zona}</td>
             <td>${direccion_sede}</td>
             <td>${departamento}</td>
@@ -147,18 +163,37 @@ formMunicipio.addEventListener("submit", (e) => {
         `;
 
           contador++;
+          total_matriculado_acumulado += total_matricula;
+          total_docentes_acumulado += numero_docentes;
         }
 
         //Pinto la tabla con los datos correpondientes
         tableBody.innerHTML = "";
         tableBody.innerHTML = contentTable;
 
+        //Muestro los resultados estadisticos
         resultM.classList.add("show");
         resultM.innerHTML = `
           <i class="material-icons text-success md-48">check_circle</i>
           <div class="media-body pl-2">
-              <h4 class="m-0">${contador}</h4>
+              <h4 class="m-0">${contador.toLocaleString()}</h4>
               <span>Instituciones Totales en el Municipio de ${municipio}</span>
+          </div>
+        `;
+        resultM_2.classList.add("show");
+        resultM_2.innerHTML = `
+          <i class="material-icons text-success md-48">check_circle</i>
+          <div class="media-body pl-2">
+              <h4 class="m-0">${total_matriculado_acumulado.toLocaleString()}</h4>
+              <span>Total de Estudiantes Matriculados en el Municipio de ${municipio}</span>
+          </div>
+        `;
+        resultM_3.classList.add("show");
+        resultM_3.innerHTML = `
+          <i class="material-icons text-success md-48">check_circle</i>
+          <div class="media-body pl-2">
+              <h4 class="m-0">${total_docentes_acumulado.toLocaleString()}</h4>
+              <span>Total de Docentes en el Municipio de ${municipio}</span>
           </div>
         `;
 
@@ -200,6 +235,7 @@ formMunicipio.addEventListener("submit", (e) => {
         // Ocultar el modal de carga
         loadingModalTown.style.display = "none";
         content_scroll.classList.add("mdk-header-layout__content--scrollable");
+        contentResultMunicipio.style.display = "block";
       });
   }
 });

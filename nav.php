@@ -9,7 +9,7 @@ $datosAdministrador = mysqli_fetch_assoc($consultaAdministrador);
 ?>
 <div class="d-flex flex-column position-relative h-100">
     <nav class="navbar navbar-expand-md navbar-light d-print-none fondoLogoMen">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
             <img class="logoMEN" src="./images/logoMEN1.png" />
         </a>
 
@@ -44,38 +44,43 @@ $datosAdministrador = mysqli_fetch_assoc($consultaAdministrador);
                     <nav class="drawer drawer--dark">
                         <div class="drawer-spacer drawer-spacer-border">
                             <div class="media align-items-center">
-                                <img src="assets/images/avatars/nina-strehl-140734.jpg" class="img-fluid rounded-circle mr-2" width="40" alt="" />
+                                <img src="<?php echo $datosAdministrador['foto_perfil']; ?>" class="img-fluid rounded-circle mr-2" width="40" alt="" />
                                 <div class="media-body" style="line-height: 1.2">
                                     <a href=""><strong><?php echo $datosAdministrador['nombre_administrador']; ?></strong></a>
                                     <div>Administrador</div>
                                 </div>
                             </div>
                         </div>
-
+                        <br>
                         <!-- MENU -->
                         <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
                             <li class="drawer-menu-item drawer-submenu">
                                 <a data-parent="#mainMenu" href="index.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
                                     <i class="material-icons">home</i>
-                                    <span class="drawer-menu-text"> Dashboard</span>
+                                    <span class="drawer-menu-text"> Inicio</span>
                                 </a>
                             </li>
+                        </ul>
+                        <!-- HEADING -->
+                        <div class="drawer-heading">Búsqueda Georeferenciada</div>
+                        <!-- MENU -->
+                        <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
                             <li class="drawer-menu-item drawer-submenu">
                                 <a data-parent="#mainMenu" href="contenedor_busqueda_por_departamento.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
                                     <i class="material-icons">home</i>
-                                    <span class="drawer-menu-text"> Búsqueda por Departam.</span>
+                                    <span class="drawer-menu-text">Búsqueda por Departam.</span>
                                 </a>
                             </li>
                             <li class="drawer-menu-item drawer-submenu">
                                 <a data-parent="#mainMenu" href="contenedor_busqueda_por_municipio.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
                                     <i class="material-icons">home</i>
-                                    <span class="drawer-menu-text"> Búsqueda por Municipio</span>
+                                    <span class="drawer-menu-text">Búsqueda por Municipio</span>
                                 </a>
                             </li>
                             <li class="drawer-menu-item drawer-submenu">
                                 <a data-parent="#mainMenu" href="contenedor_busqueda_por_institucion.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
                                     <i class="material-icons">home</i>
-                                    <span class="drawer-menu-text"> Búsqueda por Institución</span>
+                                    <span class="drawer-menu-text">Búsqueda por Institución</span>
                                 </a>
                             </li>
                             <!--
@@ -87,6 +92,31 @@ $datosAdministrador = mysqli_fetch_assoc($consultaAdministrador);
                             </li>
                         -->
                         </ul>
+                        <!-- HEADING -->
+                        <div class="drawer-heading">Estadísticas</div>
+                        <!-- MENU -->
+                        <ul class="drawer-menu" id="mainMenu" data-children=".drawer-submenu">
+                            <li class="drawer-menu-item drawer-submenu">
+                                <a data-parent="#mainMenu" href="contenedor_analitica_instituciones.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
+                                    <i class="material-icons">home</i>
+                                    <span class="drawer-menu-text">Analítica Instituciones</span>
+                                </a>
+                            </li>
+                            <li class="drawer-menu-item drawer-submenu">
+                                <a data-parent="#mainMenu" href="contenedor_analitica_docentes.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
+                                    <i class="material-icons">home</i>
+                                    <span class="drawer-menu-text">Analítica Docentes</span>
+                                </a>
+                            </li>
+                            <li class="drawer-menu-item drawer-submenu">
+                                <a data-parent="#mainMenu" href="contenedor_analitica_estudiantes.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
+                                    <i class="material-icons">home</i>
+                                    <span class="drawer-menu-text">Analítica Estudiantes</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
                         <!-- HEADING -->
                         <div class="drawer-heading">Ministerio de Educación</div>
                         <!-- ACTIVITY -->

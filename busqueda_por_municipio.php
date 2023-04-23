@@ -47,54 +47,77 @@
             </div>
         </div>
 
-        <hr>
-        
-        <div class="card-deck">
-            <div class="card p-2 pl-3 pr-3">
-                <div class="result media justify-items-center align-items-center h-md-100" id="resultMunicipio">
-                    <i class="material-icons text-success md-48">check_circle</i>
+        <div id="contentResultMunicipio" style="display: none;">
+            <hr>
+            <div class="card-deck mb-3">
+                <div class="col-4">
+                    <div class="card p-2 pl-3 pr-3">
+                        <div class="result media justify-items-center align-items-center h-md-100" id="resultMunicipio">
+                            <i class="material-icons text-success md-48">check_circle</i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <h4 class="card-title">Visor Georeferenciado</h4>
-            </div>
-            <div class="table-responsive">
-                <div id="mapMunicipio" class="mapaColombia"></div>
-            </div>
-        </div>
+                <div class="col-4">
+                    <div class="card p-2 pl-3 pr-3">
+                        <div class="result media justify-items-center align-items-center h-md-100" id="resultMunicipio_2">
+                            <i class="material-icons text-success md-48">check_circle</i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
 
-        <hr>
-
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Sedes Educativas por Municipio
-                </h4>
+                <div class="col-4">
+                    <div class="card p-2 pl-3 pr-3">
+                        <div class="result media justify-items-center align-items-center h-md-100" id="resultMunicipio_3">
+                            <i class="material-icons text-success md-48">check_circle</i>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
-            <div class="py-4">
+
+
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h4 class="card-title">Visor Georeferenciado</h4>
+                </div>
                 <div class="table-responsive">
-                    <table id="data-table" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Código Dane</th>
-                                <th>ID</th>
-                                <th>Nombre EE</th>
-                                <th>Nombre Sede</th>
-                                <th>Total Matriculados en la sede</th>
-                                <th>Zona sede</th>
-                                <th>Dirección sede</th>
-                                <th>Departamento de la sede</th>
-                                <th>Municipio de la sede</th>
-                                <th>Latitud de la sede</th>
-                                <th>Longitud de la sede</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody"></tbody>
-                    </table>
+                    <div id="mapMunicipio" class="mapaColombia"></div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Sedes Educativas por Municipio
+                    </h4>
+                </div>
+                <div class="py-4">
+                    <div class="table-responsive">
+                        <table id="data-table" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Código Dane</th>
+                                    <th>ID</th>
+                                    <th>Nombre EE</th>
+                                    <th>Nombre Sede</th>
+                                    <th>Total Matriculados en la sede</th>
+                                    <th>Total Docentes en la sede</th>
+                                    <th>Zona sede</th>
+                                    <th>Dirección sede</th>
+                                    <th>Departamento de la sede</th>
+                                    <th>Municipio de la sede</th>
+                                    <th>Latitud de la sede</th>
+                                    <th>Longitud de la sede</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

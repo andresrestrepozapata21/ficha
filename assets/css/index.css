@@ -14,7 +14,7 @@
 
 /* Estilos para el modal */
 .modal {
-  display: none;
+  display: block;
   position: fixed;
   z-index: 9999;
   top: 0;
@@ -33,6 +33,118 @@
 
 /* Estilos para el spinner */
 .loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007BFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+.modal_home {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content_home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Estilos para el spinner */
+.loader_home {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007BFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+.modal_instituciones {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content_instituciones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Estilos para el spinner */
+.loader_instituciones {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007BFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+.modal_docentes {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content_docentes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Estilos para el spinner */
+.loader_docentes {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007BFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+.modal_estudiantes {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content_estudiantes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Estilos para el spinner */
+.loader_estudiantes {
   border: 8px solid #f3f3f3;
   border-top: 8px solid #007BFF;
   border-radius: 50%;

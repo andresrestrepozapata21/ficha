@@ -104,3 +104,5 @@
 </div>
 <!-- // END drawer-layout -->
 </div>
+
+<script src="assets/js/instituciones.js"></script>

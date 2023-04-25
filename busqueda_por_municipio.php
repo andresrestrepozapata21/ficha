@@ -149,3 +149,5 @@
         });
     }
 </script>
+
+<script src="assets/js/municipio.js"></script>

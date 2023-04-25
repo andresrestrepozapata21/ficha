@@ -1,29 +1,46 @@
 <?php
 include("backend/conexion.php");
 
+//Calculamos la cantidad de instituciones
 $sentenciaInstituciones = "SELECT nombre_sede FROM datos_generales";
 $consultaInstituciones = mysqli_query($conn, $sentenciaInstituciones);
 $contadorInst = 0;
-while ($fila = mysqli_fetch_assoc($consultaInstituciones)) {
+while ($filaInst = mysqli_fetch_assoc($consultaInstituciones)) {
     $contadorInst++;
 }
 
+//Calculamos la cantidad de instituciones Urbanas
 $sentenciaInstUrbanas = "SELECT nombre_sede FROM datos_generales WHERE zona='URBANA'";
 $consultaInstUrbanas = mysqli_query($conn, $sentenciaInstUrbanas);
 $contadorInstUrbanas = 0;
-while ($fila = mysqli_fetch_assoc($consultaInstUrbanas)) {
+while ($filaInstUr = mysqli_fetch_assoc($consultaInstUrbanas)) {
     $contadorInstUrbanas++;
 }
 
+//Calculamos la cantidad de instituciones Rurales
 $sentenciaInstRurales = "SELECT nombre_sede FROM datos_generales WHERE zona='RURAL'";
 $consultaInstRurales = mysqli_query($conn, $sentenciaInstRurales);
 $contadorInstRurales = 0;
-while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
+while ($filaInstRu = mysqli_fetch_assoc($consultaInstRurales)) {
     $contadorInstRurales++;
 }
 
+//Calculamos la cantidad de docentes
+$sentenciaDocentes = "SELECT count(*) cantidadDocentes FROM docentes";
+$consultaDocentes = mysqli_query($conn, $sentenciaDocentes);
+$filaDocentes = mysqli_fetch_assoc($consultaDocentes);
+$contadorDocentes = $filaDocentes["cantidadDocentes"];
+
+//Calculamos la cantidad de matriculados
+$sentenciaEstudiantes = "SELECT total_matricula FROM datos_generales";
+$consultaEstudiantes = mysqli_query($conn, $sentenciaEstudiantes);
+$contadorEstudiantes = 0;
+while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
+    $contadorEstudiantes+=$filaMatriculados["total_matricula"];
+}
+
 ?>
-<div class="mdk-drawer-layout__content mdk-header-layout__content--scrollable">
+<div class="mdk-drawer-layout__content mdk-header-layout__content--scrollable" id="content_scroll_home">
     <!-- CONTENT BODY -->
 
     <div class="container-fluid">
@@ -36,10 +53,16 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
                 </span>
             </div>
         </div>
-        <!-- para borrar esto es lo quye hare mañana -->
+        <!-- para borrar esto es lo quye hare mañana 
         <div class="card p-2">
             <div class="d-md-flex align-items-center justify-content-start table-responsive">
                 <img src="assets/images/lista.PNG" alt="">
+            </div>
+        </div>-->
+        <!-- Modal de carga -->
+        <div id="loading_modal_home" class="modal_home">
+            <div class="modal_content_home">
+                <div class="loader_home"></div>
             </div>
         </div>
         <!-- INFORMACION GENERAL DE LAS INSTITUCIONES -->
@@ -56,7 +79,7 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
             </div>
             <div class="p-4">
                 <div class="table-responsive">
-                    <span >
+                    <span>
                         <canvas class="table-responsive" id="myChart" width="100%" height="30%"></canvas>
                     </span>
                 </div>
@@ -107,25 +130,14 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- INFORMACION GENERAL DE LOS ESTUDIANTES -->
-        <div class="p-2">
-            <div class="d-md-flex align-items-center justify-content-start">
-                <span class="badge mr-md-2">
-                    <h1>Información General de los Estudiantes</h1>
-                </span>
-            </div>
-        </div>
-        <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Gráfico barras Horizontales</h3>
+                    <h3 class="card-title">Cantidad de Instituciones Conectadas</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
                         <span class="table-responsive">
-                            <canvas class="table-responsive" id="myChartPie2" width="100%" height="100%"></canvas>
+                            <canvas class="table-responsive" id="myChartConectadas" width="100%" height="100%"></canvas>
                         </span>
                     </div>
                 </div>
@@ -140,15 +152,108 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
                 </span>
             </div>
         </div>
+        <div class="card-deck">
+            <div class="card p-2 pl-3 pr-3">
+                <div class="media justify-items-center align-items-center h-md-100">
+                    <i class="material-icons text-success md-48">check_circle</i>
+                    <div class="media-body pl-2">
+                        <h4 class="m-0"><?php echo number_format($contadorDocentes, 0, ",", "."); ?></h4>
+                        <span>Total de Docentes en Colombia</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
         <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Gráfico barras Horizontales</h3>
+                    <h3 class="card-title">Rangos de Edades de los Docentes</h3>
                 </div>
                 <div class="">
                     <div class="">
                         <span class="table-responsive">
                             <canvas class="table-responsive" id="myChartPie2" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Cantidad de Docentes por Escalafon</h3>
+                </div>
+                <div class="">
+                    <div class="">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="escalafon" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Rangos de Tiempos de Vinculación Transcurrida</h3>
+                </div>
+                <div class="">
+                    <div class="">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="tiempoVinculacion" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- INFORMACION GENERAL DE LOS ESTUDIANTES -->
+        <div class="p-2">
+            <div class="d-md-flex align-items-center justify-content-start">
+                <span class="badge mr-md-2">
+                    <h1>Información General de los Estudiantes</h1>
+                </span>
+            </div>
+        </div>
+        <div class="card p-2 pl-3 pr-3">
+            <div class="media justify-items-center align-items-center h-md-100">
+                <i class="material-icons text-success md-48">check_circle</i>
+                <div class="media-body pl-2">
+                    <h4 class="m-0"><?php echo number_format($contadorEstudiantes, 0, ",", "."); ?></h4>
+                    <span>Total de Estudiantes Matriculados en Colombia</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Cantidades por Géneros Matriculados en Colombia</h3>
+                </div>
+                <div class="">
+                    <div class="table-responsive">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="myChartGeneros" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Cantidad por Etnias</h3>
+                </div>
+                <div class="">
+                    <div class="table-responsive">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="myChartEtnias" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Cantidad de Interandos en Colombia</h3>
+                </div>
+                <div class="">
+                    <div class="table-responsive">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="myChartInternados" width="100%" height="100%"></canvas>
                         </span>
                     </div>
                 </div>
@@ -159,3 +264,5 @@ while ($fila = mysqli_fetch_assoc($consultaInstRurales)) {
 </div>
 <!-- // END drawer-layout -->
 </div>
+
+<script src="assets/js/grafico.js" type="module"></script>

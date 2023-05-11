@@ -2,11 +2,11 @@
 
 include("conexion.php");
 
-$sql = "SELECT nombre_sede FROM datos_generales WHERE zona='URBANA'";
+$sql = "SELECT `Nombre Sede` FROM informacion_general WHERE Zona='URBANA'";
 $query = mysqli_query($conn, $sql);
 $urbanas = mysqli_num_rows($query);
 
-$sqlR = "SELECT nombre_sede FROM datos_generales WHERE zona='RURAL'";
+$sqlR = "SELECT `Nombre Sede` FROM informacion_general WHERE Zona='RURAL'";
 $queryR = mysqli_query($conn, $sqlR);
 $rurales = mysqli_num_rows($queryR);
 

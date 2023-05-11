@@ -5,7 +5,7 @@ include("conexion.php");
 $campo = $_POST["campo"];
 
 //$sql = "SELECT codigo_dane_sede, nombre_sede FROM datos_generales WHERE codigo_dane_sede LIKE $campo OR nombre_sede LIKE $campo ORDER BY codigo_dane_sede ASC LIMIT 0, 10";
-$sql = "SELECT codigo_dane_sede, nombre_sede, departamento, municipio FROM datos_generales WHERE nombre_sede LIKE '%$campo%' ORDER BY codigo_dane_sede ASC LIMIT 0, 10";
+$sql = "SELECT `Codigo Dane Sede` codigo_dane_sede, `Nombre Sede` nombre_sede, Departamento departamento, MUNICIPIO municipio FROM informacion_general WHERE `Nombre Sede` LIKE '%$campo%' ORDER BY `Codigo Dane Sede` ASC LIMIT 0, 10";
 $query = mysqli_query($conn, $sql);
 
 $html = "";

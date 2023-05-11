@@ -2,7 +2,7 @@
 include("backend/conexion.php");
 
 //Calculamos la cantidad de instituciones
-$sentenciaInstituciones = "SELECT nombre_sede FROM datos_generales";
+$sentenciaInstituciones = "SELECT `Nombre Sede` FROM informacion_general";
 $consultaInstituciones = mysqli_query($conn, $sentenciaInstituciones);
 $contadorInst = 0;
 while ($filaInst = mysqli_fetch_assoc($consultaInstituciones)) {
@@ -10,7 +10,7 @@ while ($filaInst = mysqli_fetch_assoc($consultaInstituciones)) {
 }
 
 //Calculamos la cantidad de instituciones Urbanas
-$sentenciaInstUrbanas = "SELECT nombre_sede FROM datos_generales WHERE zona='URBANA'";
+$sentenciaInstUrbanas = "SELECT `Nombre Sede` FROM informacion_general WHERE Zona='URBANA'";
 $consultaInstUrbanas = mysqli_query($conn, $sentenciaInstUrbanas);
 $contadorInstUrbanas = 0;
 while ($filaInstUr = mysqli_fetch_assoc($consultaInstUrbanas)) {
@@ -18,7 +18,7 @@ while ($filaInstUr = mysqli_fetch_assoc($consultaInstUrbanas)) {
 }
 
 //Calculamos la cantidad de instituciones Rurales
-$sentenciaInstRurales = "SELECT nombre_sede FROM datos_generales WHERE zona='RURAL'";
+$sentenciaInstRurales = "SELECT `Nombre Sede` FROM informacion_general WHERE Zona='RURAL'";
 $consultaInstRurales = mysqli_query($conn, $sentenciaInstRurales);
 $contadorInstRurales = 0;
 while ($filaInstRu = mysqli_fetch_assoc($consultaInstRurales)) {
@@ -32,11 +32,11 @@ $filaDocentes = mysqli_fetch_assoc($consultaDocentes);
 $contadorDocentes = $filaDocentes["cantidadDocentes"];
 
 //Calculamos la cantidad de matriculados
-$sentenciaEstudiantes = "SELECT total_matricula FROM datos_generales";
+$sentenciaEstudiantes = "SELECT `MATRÍCULA TOTAL` FROM informacion_general";
 $consultaEstudiantes = mysqli_query($conn, $sentenciaEstudiantes);
 $contadorEstudiantes = 0;
 while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
-    $contadorEstudiantes+=$filaMatriculados["total_matricula"];
+    $contadorEstudiantes+=$filaMatriculados["MATRÍCULA TOTAL"];
 }
 
 ?>
@@ -46,8 +46,8 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
     <div class="container-fluid">
         <div class="card p-2">
             <div class="d-md-flex align-items-center justify-content-start">
-                <span class="badge badge-warning mr-md-2">ULTIMA FECHA DE ACTUALIZACIÓN</span>
-                <span> 23 de Enero de 2023 20:29 </span>
+                <span class="badge badge-warning mr-md-2">ÚLTIMA FECHA DE ACTUALIZACIÓN</span>
+                <span> 25 de Abril de 2023</span>
                 <span class="ml-auto">
                     <a href="#"><i class="material-icons align-middle">arrow_forward</i></a>
                 </span>
@@ -120,7 +120,7 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
         <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Distribucion Urbana y Rural</h3>
+                    <h3 class="card-title">Distribución Urbana y Rural</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
@@ -167,7 +167,7 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
         <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Rangos de Edades de los Docentes</h3>
+                    <h3 class="card-title">Rangos de Edades en Docentes</h3>
                 </div>
                 <div class="">
                     <div class="">
@@ -177,21 +177,10 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
                     </div>
                 </div>
             </div>
+            
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Cantidad de Docentes por Escalafon</h3>
-                </div>
-                <div class="">
-                    <div class="">
-                        <span class="table-responsive">
-                            <canvas class="table-responsive" id="escalafon" width="100%" height="100%"></canvas>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card-header">
-                    <h3 class="card-title">Rangos de Tiempos de Vinculación Transcurrida</h3>
+                    <h3 class="card-title">Rangos Tiempo de Vinculación</h3>
                 </div>
                 <div class="">
                     <div class="">
@@ -224,7 +213,7 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
         <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Cantidades por Géneros Matriculados en Colombia</h3>
+                    <h3 class="card-title">Cantidad de Estudiantes por Género Matriculados en Colombia</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
@@ -236,7 +225,7 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
             </div>
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Cantidad por Etnias</h3>
+                    <h3 class="card-title">Cantidad de Estudiantes por Etnia</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
@@ -248,7 +237,7 @@ while ($filaMatriculados = mysqli_fetch_assoc($consultaEstudiantes)) {
             </div>
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Cantidad de Interandos en Colombia</h3>
+                    <h3 class="card-title">Cantidad de Internados en Colombia</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">

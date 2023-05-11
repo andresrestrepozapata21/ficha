@@ -89,7 +89,7 @@ while ($filaInstRu = mysqli_fetch_assoc($consultaInstRurales)) {
         <div class="card col-12 py-3 d-flex align-items-center justify-content-between flex-row">
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Distribucion Urbana y Rural</h3>
+                    <h3 class="card-title">Distribución Urbana y Rural</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
@@ -101,7 +101,19 @@ while ($filaInstRu = mysqli_fetch_assoc($consultaInstRurales)) {
             </div>
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Cantidad de Instituciones Conectadas</h3>
+                    <h3 class="card-title">Cantidad de Instituciones con Servicio de Electricidad</h3>
+                </div>
+                <div class="">
+                    <div class="table-responsive">
+                        <span class="table-responsive">
+                            <canvas class="table-responsive" id="myChartPieElectricidad" width="100%" height="100%"></canvas>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card-header">
+                    <h3 class="card-title">Cantidad de Instituciones Conectadas a Internet</h3>
                 </div>
                 <div class="">
                     <div class="table-responsive">
@@ -109,6 +121,18 @@ while ($filaInstRu = mysqli_fetch_assoc($consultaInstRurales)) {
                             <canvas class="table-responsive" id="myChartConectadasInstituciones" width="100%" height="100%"></canvas>
                         </span>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h3 class="card-title">Cantidad de Estudiantes Matriculados por Departamento</h3>
+            </div>
+            <div class="p-4">
+                <div class="table-responsive">
+                    <span>
+                        <canvas class="table-responsive" id="myChartMatriculados" width="100%" height="30%"></canvas>
+                    </span>
                 </div>
             </div>
         </div>

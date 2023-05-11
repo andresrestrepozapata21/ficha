@@ -78,6 +78,12 @@ $datosAdministrador = mysqli_fetch_assoc($consultaAdministrador);
                                 </a>
                             </li>
                             <li class="drawer-menu-item drawer-submenu">
+                                <a data-parent="#mainMenu" href="contenedor_busqueda_por_EE.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
+                                    <i class="material-icons">home</i>
+                                    <span class="drawer-menu-text">Búsqueda por Entidad</span>
+                                </a>
+                            </li>
+                            <li class="drawer-menu-item drawer-submenu">
                                 <a data-parent="#mainMenu" href="contenedor_busqueda_por_institucion.php" data-target="#dashboardMenu" aria-controls="dashboardMenu" aria-expanded="false">
                                     <i class="material-icons">home</i>
                                     <span class="drawer-menu-text">Búsqueda por Institución</span>

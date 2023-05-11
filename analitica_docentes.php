@@ -59,18 +59,6 @@ $contadorDocentes = $filaDocentes["cantidadDocentes"];
             </div>
             <div class="col-4">
                 <div class="card-header">
-                    <h3 class="card-title">Cantidad de Docentes por Escalafon</h3>
-                </div>
-                <div class="">
-                    <div class="">
-                        <span class="table-responsive">
-                            <canvas class="table-responsive" id="escalafonDocentes" width="100%" height="100%"></canvas>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card-header">
                     <h3 class="card-title">Rangos de Tiempos de Vinculación Transcurrida</h3>
                 </div>
                 <div class="">

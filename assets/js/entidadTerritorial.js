@@ -1,16 +1,16 @@
 document.getElementById("campo").addEventListener("keyup", getCodigos);
-var formInstitucion = document.getElementById("formInstitucion");
-var answerInsti = document.getElementById("answerInsti");
+var formEntidad = document.getElementById("formEntidad");
+var answerEntidad = document.getElementById("answerEntidad");
 var content_scroll = document.getElementById("content_scroll");
 var info = document.getElementById("tableBody");
-var resultInst = document.getElementById("resultInst");
-var resultInst_2 = document.getElementById("resultInst_2");
-var resultInst_3 = document.getElementById("resultInst_3");
-const loadingModalInstitution = document.getElementById(
-  "loading-modal-institution"
+var resultEntidad = document.getElementById("resultEntidad");
+var resultEntidad_2 = document.getElementById("resultEntidad_2");
+var resultEntidad_3 = document.getElementById("resultEntidad_3");
+const loadingModalEntidad = document.getElementById(
+  "loading-modal-entidad"
 );
-const contentResultInstitucion = document.getElementById(
-  "contentResultInstitucion"
+const contentResultEntidad = document.getElementById(
+  "contentResultEntidad"
 );
 
 function getCodigos() {
@@ -18,7 +18,7 @@ function getCodigos() {
   let lista = document.getElementById("lista");
 
   if (inputCP.length > 0) {
-    let url = "backend/getInstituciones.php";
+    let url = "backend/getEntidades.php";
     let formData = new FormData();
     formData.append("campo", inputCP);
 
@@ -36,31 +36,31 @@ function getCodigos() {
   }
 }
 
-function mostrar(cp, nombre_sede) {
+function mostrar(cp, nombre_EE) {
   lista.style.display = "none";
   $("#cp").val(cp);
-  $("#campo").val(nombre_sede);
+  $("#campo").val(nombre_EE);
 }
 
-formInstitucion.addEventListener("submit", (e) => {
+formEntidad.addEventListener("submit", (e) => {
   e.preventDefault();
-  let datos = new FormData(formInstitucion);
+  let datos = new FormData(formEntidad);
   let cp = datos.get("cp");
   let institucion = datos.get("campo");
 
   if (cp === "") {
-    answerInsti.classList.add("show");
+    answerEntidad.classList.add("show");
     setTimeout(function () {
-      answerInsti.classList.remove("show");
+      answerEntidad.classList.remove("show");
     }, 2000);
     return;
   }
 
   // Mostrar el modal de carga
-  loadingModalInstitution.style.display = "block";
+  loadingModalEntidad.style.display = "block";
   content_scroll.classList.remove("mdk-header-layout__content--scrollable");
 
-  fetch("backend/getCoordenadasInsitucion.php", {
+  fetch("backend/getCoordenadasEntidad.php", {
     method: "POST",
     body: JSON.stringify({
       cp: cp,
@@ -84,8 +84,8 @@ formInstitucion.addEventListener("submit", (e) => {
       const map = new google.maps.Map(
         document.getElementById("mapInstitucion"),
         {
-          zoom: 12,
-          center: { lat: lat, lng: lng },
+            zoom: 6,
+            center: { lat: 4.691798, lng: -73.869012 },
           //mapTypeId: "hybrid",
         }
       );
@@ -228,24 +228,24 @@ formInstitucion.addEventListener("submit", (e) => {
       info.innerHTML = contentInfo;
 
       //Mostramos los resultado estadisticos
-      resultInst.classList.add("show");
-      resultInst.innerHTML = `
+      resultEntidad.classList.add("show");
+      resultEntidad.innerHTML = `
           <i class="material-icons text-success md-48">check_circle</i>
           <div class="media-body pl-2">
               <h4 class="m-0">Institución:</h4>
               <span>${institucion}</span>
           </div>
         `;
-      resultInst_2.classList.add("show");
-      resultInst_2.innerHTML = `
+      resultEntidad_2.classList.add("show");
+      resultEntidad_2.innerHTML = `
           <i class="material-icons text-success md-48">check_circle</i>
           <div class="media-body pl-2">
               <h4 class="m-0">${total_matriculado_acumulado.toLocaleString()}</h4>
               <span>Total de Estudiantes Matriculados</span>
           </div>
         `;
-      resultInst_3.classList.add("show");
-      resultInst_3.innerHTML = `
+      resultEntidad_3.classList.add("show");
+      resultEntidad_3.innerHTML = `
           <i class="material-icons text-success md-48">check_circle</i>
           <div class="media-body pl-2">
               <h4 class="m-0">${total_docentes_acumulado.toLocaleString()}</h4>
@@ -290,9 +290,9 @@ formInstitucion.addEventListener("submit", (e) => {
       });
 
       // Ocultar el modal de carga
-      loadingModalInstitution.style.display = "none";
+      loadingModalEntidad.style.display = "none";
       content_scroll.classList.add("mdk-header-layout__content--scrollable");
-      contentResultInstitucion.style.display = "block";
+      contentResultEntidad.style.display = "block";
 
       $("#cp").val("");
       $("#campo").val("");

@@ -1,9 +1,6 @@
 const ctxPie2Docentes = document
   .getElementById("myChartPie2Docentes")
   .getContext("2d");
-const ctxEscalafonDocentes = document
-  .getElementById("escalafonDocentes")
-  .getContext("2d");
 const ctxVinculacionDocentes = document
   .getElementById("tiempoVinculacionDocentes")
   .getContext("2d");
@@ -64,65 +61,6 @@ fetch("backend/getEdadesDocentes.php", {
           title: {
             display: true,
             text: "Rango de Edades",
-          },
-        },
-      },
-    });
-  });
-
-/*------------------------------------------
-Grafico para saber la cantidad de docentes por escalafon
--------------------------------------------*/
-fetch("backend/getEscalafon.php", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then((res) => res.json())
-  .then((data) => {
-    // <block:setup:1>
-    const DATA_COUNT = 5;
-    const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-
-    let labelsEscalafon = [];
-    let dataEscalafon = [];
-
-    for (let variable in data) {
-      let nombreVariable = variable;
-      let valorVariable = data[variable];
-
-      labelsEscalafon.push(nombreVariable);
-      dataEscalafon.push(valorVariable);
-    }
-    const dataPieEscalafonDocentes = {
-      labels: labelsEscalafon,
-      datasets: [
-        {
-          label: "Cantidad por Escalafón",
-          data: dataEscalafon,
-          backgroundColor: [
-            "rgba(255, 206, 86, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(153, 102, 255, 0.5)",
-            "rgba(255, 159, 64, 0.5)",
-          ],
-        },
-      ],
-    };
-    // </block:data>
-    const myChartPieEscalafonDocentes = new Chart(ctxEscalafonDocentes, {
-      type: "doughnut",
-      data: dataPieEscalafonDocentes,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          title: {
-            display: true,
-            text: "Cantidad por Escalafon",
           },
         },
       },

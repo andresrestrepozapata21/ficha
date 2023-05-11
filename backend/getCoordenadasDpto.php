@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $departamento = $data->dpto;
 
-$sentencia = "SELECT latitud AS lat, longitud AS lng, dg.nombre_sede, dg.direccion_sede, dg.zona, dg.codigo_dane_sede, dg.departamento,  dg.municipio, dg.sede_id, dg.total_matricula, dg.nombre_EE FROM datos_generales dg INNER JOIN georeferenciaciones g ON dg.codigo_dane_sede=g.codigo_dane_sede WHERE dg.departamento LIKE '$departamento'";
+$sentencia = "SELECT latitud lat, longitud lng, ig.`Nombre Sede` nombre_sede, ig.`Dirección Sede` direccion_sede, ig.`Zona` zona, ig.`Codigo Dane Sede` codigo_dane_sede, ig.Departamento departamento, ig.MUNICIPIO municipio, ig.SEDE_ID sede_id, ig.`MATRÍCULA TOTAL` total_matricula, ig.`Nombre EE` nombre_EE, ig.`Codigo Dane EE` codigo_dane_EE, ig.`EST_ID` est_id, ig.`BARRIO_VEREDA` barrio_vereda FROM informacion_general ig INNER JOIN georeferenciaciones g ON ig.`Codigo Dane Sede`=g.codigo_dane_sede WHERE ig.Departamento LIKE '$departamento'";
 $resultado = mysqli_query($conn, $sentencia);
 
 $filas = array();

@@ -12,7 +12,6 @@ const ctxEtnias = document.getElementById("myChartEtnias").getContext("2d");
 const ctxInternados = document
   .getElementById("myChartInternados")
   .getContext("2d");
-const ctxEscalafon = document.getElementById("escalafon").getContext("2d");
 
 const loadingModalHome = document.getElementById("loading_modal_home");
 var content_scroll = document.getElementById("content_scroll_home");
@@ -83,7 +82,11 @@ fetch("backend/getPorZona.php", {
           label: "Cantidad de instituciones por zona",
           data: [cantidadUrbanas, cantidadRurales],
           borderWidth: 1,
-          backgroundColor: ["#CB4335", "#1F618D"],
+          backgroundColor: [
+            "rgba(128, 139, 150, 0.5)",
+            "rgba(30, 132, 73, 0.5)",
+          ],
+          borderColor: ["rgba(128, 139, 150, 1)", "rgba(30, 132, 73, 1)"],
         },
       ],
     };
@@ -198,68 +201,6 @@ fetch("backend/getConectadas.php", {
   });
 
 /*------------------------------------------
-Grafico para saber la cantidad de docentes por escalafon
--------------------------------------------*/
-fetch("backend/getEscalafon.php", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then((res) => res.json())
-  .then((data) => {
-    // <block:setup:1>
-    const DATA_COUNT = 5;
-    const NUMBER_CFG = { count: DATA_COUNT, min: 0, max: 100 };
-
-    let labelsEscalafon = [];
-    let dataEscalafon = [];
-
-    for (let variable in data) {
-      let nombreVariable = variable;
-      let valorVariable = data[variable];
-
-      labelsEscalafon.push(nombreVariable);
-      dataEscalafon.push(valorVariable);
-    }
-    const dataPieEscalafon = {
-      labels: labelsEscalafon,
-      datasets: [
-        {
-          label: "Cantidad por Escalafón",
-          data: dataEscalafon,
-          backgroundColor: [
-            "rgba(255, 206, 86, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(153, 102, 255, 0.5)",
-            "rgba(255, 159, 64, 0.5)",
-          ],
-        },
-      ],
-    };
-    // </block:data>
-    const myChartPieEscalafon = new Chart(ctxEscalafon, {
-      type: "doughnut",
-      data: dataPieEscalafon,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "top",
-          },
-          title: {
-            display: true,
-            text: "Cantidad por Escalafon",
-          },
-        },
-      },
-    });
-
-    loadingModalHome.style.display = "none";
-    content_scroll.classList.add("mdk-header-layout__content--scrollable");
-  });
-
-/*------------------------------------------
 Grafica para ver los rangos de tiempo transcurrido de vincuacion de los docentes
 -------------------------------------------*/
 fetch("backend/getTiempoVinculacion.php", {
@@ -316,6 +257,8 @@ fetch("backend/getTiempoVinculacion.php", {
         },
       },
     });
+    loadingModalHome.style.display = "none";
+    content_scroll.classList.add("mdk-header-layout__content--scrollable");
   });
 
 /*------------------------------------------

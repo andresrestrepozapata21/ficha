@@ -57,14 +57,20 @@ formMunicipio.addEventListener("submit", (e) => {
         let total_docentes_acumulado = 0;
 
         for (i = 0; i <= data.length - 1; i++) {
-          let codigo_dane = data[i]["codigo_dane_sede"];
-          let sede_id = data[i]["sede_id"];
+          let codigo_dane_EE = data[i]["codigo_dane_EE"];
+          let est_id = data[i]["est_id"];
           let nombre_EE = data[i]["nombre_EE"];
+          let codigo_dane_sede = data[i]["codigo_dane_sede"];
+          let sede_id = data[i]["sede_id"];
           let nombre_sede = data[i]["nombre_sede"];
           let total_matricula = data[i]["total_matricula"];
           let numero_docentes = data[i]["numero_docentes"];
           let zona = data[i]["zona"];
           let direccion_sede = data[i]["direccion_sede"];
+          let veredaCorregimiento = data[i]["BARRIO_VEREDA"];
+          if(veredaCorregimiento === ""){
+            veredaCorregimiento = "N/A"
+          }
           let departamento = data[i]["departamento"];
           let municipio = data[i]["municipio"];
           let lat = data[i]["lat"];
@@ -76,41 +82,50 @@ formMunicipio.addEventListener("submit", (e) => {
             '<div style="width: 100%;"><h4 id="firstHeading" class="firstHeading" style="margin-top: 20px;width: 95%;margin: 0 auto;text-align: center;">Información</h4></div>' +
             '<div id="bodyContent">' +
             "<br>" +
-            "<p><b>Código Dane: </b>" +
-            codigo_dane +
+            "<p><b>Código Dane EE: </b>" +
+            codigo_dane_EE +
             "</p>" +
-            "<p><b>ID de la EE: </b>" +
-            sede_id +
+            "<p><b>ID EE: </b>" +
+            est_id +
             "</p>" +
             "<p><b>Nombre EE: </b><span class='text-danger'>" +
             nombre_EE +
             "</span></p>" +
             "</p>" +
+            "<p><b>Código Dane Sede: </b>" +
+            codigo_dane_sede +
+            "</p>" +
+            "<p><b>ID Sede: </b>" +
+            sede_id +
+            "</p>" +
             "<p><b>Nombre Sede: </b><span class='text-danger'>" +
             nombre_sede +
             "</span></p>" +
-            "<p><b>Total Matriculados en la  EE: </b>" +
-            total_matricula +
-            "</p>" +
-            "<p><b>Número de Docentes: </b><span class='text-danger'>" +
-            numero_docentes +
-            "</span></p>" +
-            "<p><b>Zona EE: </b>" +
-            zona +
-            "</p>" +
-            "<p><b>Dirección EE: </b>" +
-            direccion_sede +
-            "</p>" +
-            "<p><b>Departamento de la EE: </b>" +
+            "<p><b>Departamento: </b>" +
             departamento +
             "</p>" +
-            "<p><b>Municipio de la EE: </b>" +
+            "<p><b>Municipio: </b>" +
             municipio +
             "</p>" +
-            "<p><b>Latitud de la EE: </b><span class='text-danger'>" +
+            "<p><b>Zona: </b>" +
+            zona +
+            "</p>" +
+            "<p><b>Barrio/Vereda/Corregimiento: </b>" +
+            veredaCorregimiento +
+            "</p>" +
+            "<p><b>Dirección: </b>" +
+            direccion_sede +
+            "</p>" +
+            "<p><b>Número de Docentes: </b>" +
+            numero_docentes +
+            "</p>" +
+            "<p><b>Total Matriculados: </b>" +
+            total_matricula +
+            "</p>" +
+            "<p><b>Latitud: </b><span class='text-danger'>" +
             lat +
             "</span></p>" +
-            "<p><b>Longitud de la EE: </b><span class='text-danger'>" +
+            "<p><b>Longitud: </b><span class='text-danger'>" +
             lng +
             "</span></p>" +
             "</div>" +
@@ -147,16 +162,19 @@ formMunicipio.addEventListener("submit", (e) => {
           //Guarpo en una variable cada fila del dataTable con la informacion de las sedes
           contentTable += `
           <tr>
-            <td>${codigo_dane}</td>
-            <td>${sede_id}</td>
+            <td>${codigo_dane_EE}</td>
+            <td>${est_id}</td>
             <td>${nombre_EE}</td>
+            <td>${codigo_dane_sede}</td>
+            <td>${sede_id}</td>
             <td>${nombre_sede}</td>
-            <td>${total_matricula}</td>
-            <td>${numero_docentes}</td>
-            <td>${zona}</td>
-            <td>${direccion_sede}</td>
             <td>${departamento}</td>
             <td>${municipio}</td>
+            <td>${zona}</td>
+            <td>${veredaCorregimiento}</td>
+            <td>${direccion_sede}</td>
+            <td>${numero_docentes}</td>
+            <td>${total_matricula}</td>
             <td>${lat}</td>
             <td>${lng}</td>
           </tr>

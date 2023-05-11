@@ -101,16 +101,19 @@
                         <table id="data-table" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Código Dane</th>
-                                    <th>ID</th>
+                                    <th>Código Dane EE</th>
+                                    <th>ID EE</th>
                                     <th>Nombre EE</th>
+                                    <th>Código Dane Sede</th>
+                                    <th>ID Sede</th>
                                     <th>Nombre Sede</th>
-                                    <th>Total Matriculados en la sede</th>
-                                    <th>Total Docentes en la sede</th>
-                                    <th>Zona sede</th>
-                                    <th>Dirección sede</th>
                                     <th>Departamento de la sede</th>
                                     <th>Municipio de la sede</th>
+                                    <th>Zona sede</th>
+                                    <th>Barrio/Vereda/Corregimiento</th>
+                                    <th>Dirección sede</th>
+                                    <th>Total Docentes en la sede</th>
+                                    <th>Total Matriculados en la sede</th>
                                     <th>Latitud de la sede</th>
                                     <th>Longitud de la sede</th>
                                 </tr>

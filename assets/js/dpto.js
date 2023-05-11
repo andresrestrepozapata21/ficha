@@ -52,8 +52,10 @@ formDpto.addEventListener("submit", (e) => {
         let total_matriculado_acumulado = 0;
 
         data.forEach((el) => {
-          let codigo_dane = el.codigo_dane_sede;
+          let codigo_dane_sede = el.codigo_dane_sede;
           let sede_id = el.sede_id;
+          let est_id = el.est_id;
+          let codigo_dane_EE = el.codigo_dane_EE;
           let nombre_EE = el.nombre_EE;
           let nombre_sede = el.nombre_sede;
           let total_matricula = el.total_matricula;
@@ -61,6 +63,10 @@ formDpto.addEventListener("submit", (e) => {
           let direccion_sede = el.direccion_sede;
           let departamento = el.departamento;
           let municipio = el.municipio;
+          let veredaCorregimiento = el.barrio_vereda;
+          if(veredaCorregimiento === ""){
+            veredaCorregimiento = "N/A"
+          }
           let lat = el.lat;
           let lng = el.lng;
 
@@ -72,32 +78,41 @@ formDpto.addEventListener("submit", (e) => {
             '<div style="width: 100%;"><h4 id="firstHeading" class="firstHeading" style="margin-top: 20px;width: 95%;margin: 0 auto;text-align: center;">Información</h4></div>' +
             '<div id="bodyContent">' +
             "<br>" +
-            "<p><b>Código Dane: </b>" +
-            codigo_dane +
+            "<p><b>Código Dane EE: </b>" +
+            codigo_dane_EE +
             "</p>" +
-            "<p><b>ID: </b>" +
-            sede_id +
+            "<p><b>ID EE: </b>" +
+            est_id +
             "</p>" +
             "<p><b>Nombre EE: </b><span class='text-danger'>" +
             nombre_EE +
             "</span></p>" +
+            "<p><b>Código Dane Sede: </b>" +
+            codigo_dane_sede +
+            "</p>" +
+            "<p><b>ID Sede: </b>" +
+            sede_id +
+            "</p>" +
             "<p><b>Nombre Sede: </b><span class='text-danger'>" +
             nombre_sede +
             "</span></p>" +
-            "<p><b>Total Matriculados en la  sede: </b>" +
-            total_matricula +
-            "</p>" +
-            "<p><b>Zona sede: </b>" +
-            zona +
-            "</p>" +
-            "<p><b>Dirección sede: </b>" +
-            direccion_sede +
-            "</p>" +
             "<p><b>Departamento de la sede: </b>" +
             departamento +
             "</p>" +
             "<p><b>Municipio de la sede: </b>" +
             municipio +
+            "</p>" +
+            "<p><b>Zona sede: </b>" +
+            zona +
+            "</p>" +
+            "<p><b>Barrio/Vereda/Corregimiento: </b>" +
+            veredaCorregimiento +
+            "</p>" +
+            "<p><b>Dirección sede: </b>" +
+            direccion_sede +
+            "</p>" +
+            "<p><b>Total Matriculados en la  sede: </b>" +
+            total_matricula +
             "</p>" +
             "<p><b>Latitud de la sede: </b><span class='text-danger'>" +
             lat +
@@ -132,15 +147,18 @@ formDpto.addEventListener("submit", (e) => {
           //Guarpo en una variable cada fila del dataTable con la informacion de las sedes
           const $tr = document.createElement("tr");
           $tr.innerHTML = `
-            <td>${codigo_dane}</td>
-            <td>${sede_id}</td>
+            <td>${codigo_dane_EE}</td>
+            <td>${est_id}</td>
             <td>${nombre_EE}</td>
+            <td>${codigo_dane_sede}</td>
+            <td>${sede_id}</td>
             <td>${nombre_sede}</td>
-            <td>${total_matricula}</td>
-            <td>${zona}</td>
-            <td>${direccion_sede}</td>
             <td>${departamento}</td>
             <td>${municipio}</td>
+            <td>${zona}</td>
+            <td>${veredaCorregimiento}</td>
+            <td>${direccion_sede}</td>
+            <td>${total_matricula}</td>
             <td>${lat}</td>
             <td>${lng}</td>
         `;
